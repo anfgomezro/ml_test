@@ -1,0 +1,28 @@
+{
+  "name": "ml_test",
+  "version": "1.0.0",
+  "description": "ML practical test",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anfgomezro/ml_test.git"
+  },
+  "author": "Andres Gomez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anfgomezro/ml_test/issues"
+  },
+  "homepage": "https://github.com/anfgomezro/ml_test#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "node-sass": "^5.0.0",
+    "superagent": "^6.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
