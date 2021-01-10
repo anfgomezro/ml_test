@@ -7,18 +7,20 @@ import './App.scss';
 
 export default function App() {
  return (
-   <BrowserRouter>
+  <BrowserRouter>
     <Switch>
-    <Route path="/items/:id">
+      <Route path="/items/:id">
+        <SearchBar/>
         <DetailProduct/>
       </Route>
       <Route path="/items">
+        <SearchBar/>
         <Results/>
       </Route>
       <Route path="/">
         <SearchBar/>
       </Route>
     </Switch>
-   </BrowserRouter>
+  </BrowserRouter>
  );
 }

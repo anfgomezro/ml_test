@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom'
 
 const SearchBar = () => {
 
   const [search, setSearch] = useState('');
+  const history = useHistory();
 
   const onChange = (text) => {
     setSearch(text);
@@ -11,12 +13,13 @@ const SearchBar = () => {
   const onKeyPress = (event) => {
     const code = event.keyCode || event.which;
     if(code === 13) {
-      console.log('hola enter');
+      getResults();
     } 
   };
 
   const getResults = () => {
-    console.log('soy el metodo magico');
+    console.log('getREsultus call function');
+    history.push(`/items?q=${search}`);
   }
 
   return (
