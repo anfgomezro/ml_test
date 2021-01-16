@@ -7,15 +7,14 @@ const app = express();
 
 app.get('/api/items', async (req,res) => {
   const query = req.query.q;
-  if (query) {
-    try {
-      const response = await superagent.get('https://api.mercadolibre.com/sites/MLA/search').query({ q: query });
-      res.json(getResults(response))
-    } catch (e) {
-      console.log(e);
-    }
-  } else {
-    res.redirect('/');
+  try {
+    const response = await superagent.get('https://api.mercadolibre.com/sites/MLA/search').query({ q: query });
+    res.json(getResults(response))
+  } catch (e) {
+    console.log(e);
+    res.status(404).json({
+      message: 'Results not found',
+    });
   }
 });
 
@@ -24,9 +23,13 @@ app.get('/api/items/:id', async (req, res) => {
   try {
     const product = (await superagent.get(`https://api.mercadolibre.com/items/${id}`)).body;
     const productDescription = (await superagent.get(`https://api.mercadolibre.com/items/${id}/description`)).body;
-    res.json(getProduct({ ...product, description: productDescription.plain_text }));
+    const author = (await superagent.get(`https://api.mercadolibre.com/users/${product.seller_id}`)).body;
+    res.json(getProduct({ ...product, ...author, description: productDescription.plain_text }));
   } catch (e) {
     console.log(e);
+    res.status(404).json({
+      message: 'Results not found',
+    });
   }
 });
 

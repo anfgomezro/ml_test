@@ -18,25 +18,24 @@ const SearchBar = () => {
   };
 
   const getResults = () => {
-    console.log('getREsultus call function');
-    history.push(`/items?q=${search}`);
+    if (search) history.push(`/items?q=${search}`);
   }
 
   return (
-    <header className="search-bar">
-      <div className="wrapper">
-        <a className="nav-logo" href="/">Mercado Libre Colombia - Donde comprar y vender de todo</a>
-        <div className="search-form">
-          <input 
-            className="search-input"
+    <header role="banner" className="search-bar">
+      <div className="search-bar-wrapper">
+        <a className="search-bar-logo" href="/">Mercado Libre Colombia - Donde comprar y vender de todo</a>
+        <div className="search-bar-form">
+          <input className="search-bar-input"
             type="text"
             placeholder="Nunca dejes de buscar"
             autoFocus
             onChange ={(e) => onChange(e.target.value)}
-            onKeyPress={(e) => onKeyPress(e)}/>
-            <button className="search-button" onClick={getResults}>
-              <i className="fas fa-search"></i>
-            </button>
+            onKeyPress={(e) => onKeyPress(e)}
+            aria-label="Search Terms"/>
+          <button className="search-bar-button" onClick={getResults} aria-label="search-button">
+            <i className="fas fa-search"></i>
+          </button>
         </div> 
        </div>
     </header>
