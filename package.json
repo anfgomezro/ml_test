@@ -4,10 +4,10 @@
   "description": "ML practical test",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "client-install": "cd client && npm install",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "start": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
