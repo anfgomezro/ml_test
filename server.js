@@ -26,8 +26,9 @@ app.get('/api/items/:id', async (req, res) => {
     const author = (await superagent.get(`https://api.mercadolibre.com/users/${product.seller_id}`)).body;
     res.json(getProduct({ ...product, ...author, description: productDescription.plain_text }));
   } catch (e) {
-    console.log(e);
-    res.status(404).json({
+    console.log(e.status);
+    res.status(e.status).json({
+      status: e.status,
       message: 'Results not found',
     });
   }

@@ -1,0 +1,85 @@
+.search-result {
+  margin: 0px auto 30px;
+  width: 90%;
+
+  @media(min-width: 992px) {
+    width: 70%;
+  }
+
+  .search-result-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+
+    .search-result-wrapper {
+      border-bottom: thin solid #eee;
+      display: flex;
+      flex-grow: 1;
+      padding: 20px 50px 20px 0;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.35;
+      background-color: #fff;
+      border-radius: 4px 4px 0 0;
+      font-family: Proxima Nova,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif;
+    
+      .search-result-image {
+        padding: 0 24px;
+        width: 160px;
+        height: 160px;
+        min-width: 160px;
+    
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+    
+      .search-result-price {
+        display: flex;
+    
+        .search-result-price__amount {
+          color: #333;
+          font-size: 24px;
+          font-weight: 400;
+          margin-bottom: 10px;
+          line-height: 1.25;
+        }
+    
+        span {
+          background-color: #00a650;
+          padding: 5px;
+          border-radius: 10px;
+          height: 10px;
+          position: relative;
+          width: 10px;
+          top: 5px;
+          left: 10px;
+    
+          svg {
+            font-size: 9px;
+            position: absolute;
+          }
+        }
+      }
+    
+      .search-result-title {
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 1.3;
+        margin: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: break-word;
+    
+        a {
+          color: #333;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

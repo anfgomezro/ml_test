@@ -1,5 +1,18 @@
 const R = require('ramda');
 
+const getPicture = R.ifElse(
+  R.pipe(
+    R.prop('pictures'),
+    R.isNil
+  ),
+  R.prop('thumbnail'),
+  R.pipe(
+    R.prop('pictures'),
+    R.head,
+    R.prop('url')
+  )
+);
+
 const calcDecimal = R.pipe(
   R.modulo(R.__,1),
   R.multiply(100),
@@ -24,7 +37,7 @@ const transformResults = R.applySpec({
     amount: getAmount,
     decimals: getDecimal,
   }, 
-  picture: R.prop('thumbnail'),
+  picture: getPicture,
   free_shipping: R.path(['shipping', 'free_shipping']),
 });
 
@@ -38,16 +51,16 @@ const getAuthor = R.pipe(
 );
 
 const processResults = R.pipe(
-  R.pick(['id', 'title', 'currency_id', 'price', 'thumbnail', 'condition', 'shipping', 'sold_quantity', 'description']),
+  R.pick(['id', 'title', 'currency_id', 'price', 'thumbnail', 'condition', 'shipping', 'sold_quantity', 'description', 'pictures']),
   R.converge(R.mergeRight, [R.identity, transformResults]),
-  R.omit(['currency_id', 'shipping', 'thumbnail'])
+  R.omit(['currency_id', 'shipping', 'thumbnail', 'pictures'])
 );
 
 const getItems = R.pipe(
   R.prop('results'),
   R.take(4),
   R.map(processResults),
-  R.map(R.omit(['sold_quantity'])),
+  R.map(R.omit(['sold_quantity', 'pictures'])),
 );
 
 const getCategories = R.pipe(

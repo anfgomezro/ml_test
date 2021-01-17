@@ -1,0 +1,36 @@
+.categories-wrapper {
+  padding: 15px 0;
+
+  .categories-list {
+    color: rgba(0,0,0,.45);
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  
+    .categories-item {
+      display: inline;
+      font-size: 14px;
+      color: #333;
+  
+      &:first-child {
+        font-weight: 700;
+        &::after {
+          content: ':';
+          padding: 0 6px 0 0;
+        }
+      }
+    
+      &:last-child {
+        &::after {
+          content: '';
+        }
+      }
+  
+      &::after {
+        content: '-';
+        padding: 0 8px;
+      }
+    }
+  }
+}

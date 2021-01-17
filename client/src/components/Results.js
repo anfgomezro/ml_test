@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import ItemResult from './ItemResult';
 import Spinner from './Spinner';
+import Categories from './Categories';
 
 export default function Results() {
-
   const location = useLocation();
+  
   const [results, setResults] = useState({
     loading: true,
     items: [],
+    categories: [],
   });
 
   useEffect(() => {
@@ -20,6 +22,7 @@ export default function Results() {
         setResults({
           loading: false,
           items: jsonData.items,
+          categories: jsonData.categories,
         });
       } catch (e) {
         console.log(e);
@@ -28,16 +31,19 @@ export default function Results() {
     fetchResults();
   }, [location]);
 
-  const { loading, items } = results;
+  const { loading, items, categories } = results;
 
   return (
-    <section className="container" role="main">
+    <section className="search-result" role="main">
       {loading 
         ? <Spinner/>
-        : 
-        <ol>
-          {items.map(item => <ItemResult item={item} key={item.id}/>)}
-        </ol>
+        :
+        <div>
+          <Categories categories={categories}/> 
+          <ol className="search-result-card">
+            {items.map(item => <ItemResult item={item} key={item.id}/>)}
+          </ol>
+        </div>
       }
     </section>
   );

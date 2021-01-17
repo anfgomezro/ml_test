@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const SearchBar = () => {
+  
+  const history = useHistory();
 
   const [search, setSearch] = useState('');
-  const history = useHistory();
 
   const onChange = (text) => {
     setSearch(text);
@@ -34,7 +37,7 @@ const SearchBar = () => {
             onKeyPress={(e) => onKeyPress(e)}
             aria-label="Search Terms"/>
           <button className="search-bar-button" onClick={getResults} aria-label="search-button">
-            <i className="fas fa-search"></i>
+            <FontAwesomeIcon icon={faSearch}/>
           </button>
         </div> 
        </div>

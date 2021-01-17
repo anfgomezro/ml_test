@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Spinner from './Spinner';
 import { useParams } from 'react-router-dom';
-import { cond } from 'ramda';
+import { getPrice, getCondition, getDecimals } from '../util';
 
 export default function DetailProduct() {
-
   const params = useParams();
+
   const [data, setData] = useState({
     loading: true,
     item: {}
@@ -30,28 +30,28 @@ export default function DetailProduct() {
 
   const { loading, item } = data;
 
-  const getCondition = (condition) => condition === 'new' ? 'Nuevo' : 'Usado';
-
   return (
-    <section className="container" role="main"> 
+    <section className="item-detail" role="main"> 
     {loading 
       ? <Spinner/>
       : 
-      <div className="item-detail">
-        <div className="item-detail__cl1">
-          <img src={item.picture} alt={item.title}/>
-          <div className="item-detail__description">
+       item ? <div className="item-detail-wrapper">
+        <div className="item-detail-cl1">
+          <div className="item-detail-picture">
+            <img src={item.picture} alt={item.title}/>
+          </div>
+          <div className="item-detail-description">
             <h2>Descripción del producto</h2>
             <p>{item.description}</p>  
           </div>
         </div>
-        <aside className="item-detail__cl2">
-          <span className="item-detail__condition">{getCondition(item.condition)} | {item.sold_quantity} Vendidos</span>
-          <h1 className="item-detail__title">{item.title}</h1>
-          <p className="item-detail__price">$ {item.price.amount}</p>
-          <button className="item-detail__button">Comprar</button>
+        <aside className="item-detail-cl2">
+          <span className="item-detail-condition">{getCondition(item.condition)} | {item.sold_quantity} Vendidos</span>
+          <h1 className="item-detail-title">{item.title}</h1>
+          <p className="item-detail-price">$ {getPrice(item.price.amount)}<sup>{getDecimals(item.price.decimals)}</sup></p>
+          <button className="item-detail-button">Comprar</button>
         </aside>
-      </div>
+      </div> : <p>Item does not exist</p>
       }
     </section>
   );

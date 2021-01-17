@@ -1,28 +1,26 @@
 import React from 'react';
+import { getPrice } from '../util';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTruck } from '@fortawesome/free-solid-svg-icons';
 
 export default function ItemResult(props) {
-  const item = props.item;
-  const getPrice = (price) => {
-    const roundPrice = Math.ceil(price);
-    if(roundPrice >= 1000) {
-      const finalPrice = Array.from(roundPrice.toString());
-      finalPrice.splice(-3, 0, '.');
-      return finalPrice.join('');
-    }
-    return roundPrice;
-  };
+  const { item } = props;
 
   return (
-    <li className="item-wrapper">
-        <a className="item-image" href={`/items/${item.id}`}>
+    <li className="search-result-wrapper">
+        <a className="search-result-image" href={`/items/${item.id}`}>
           <img src={item.picture} alt={item.title}/>
         </a>
       <div>
-        <div className="item-price">
-          <div className="item-price__amount">$ {getPrice(item.price.amount)}</div>
-          <span><i className="fas fa-truck"></i></span>
+        <div className="search-result-price">
+          <div className="search-result-price__amount">$ {getPrice(item.price.amount)}</div>
+          { item.free_shipping && <span>
+            <FontAwesomeIcon icon={faTruck}/>
+          </span>}
         </div>
-        <h2>{item.title}</h2>
+        <h2 className="search-result-title">
+          <a href={`/items/${item.id}`}>{item.title}</a>
+        </h2>
       </div>
     </li>
   );
