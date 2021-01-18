@@ -3,7 +3,6 @@ import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import Results from './components/Results';
 import SearchBar from './components/SearchBar';
 import DetailProduct from './components/DetailProduct';
-import './sass/base.scss';
 
 export default function App() {
  return (

@@ -1,4 +1,5 @@
 import React from 'react';
+import '../sass/categories.scss';
 
 export default function Categories(props) {
   const { categories } = props;
